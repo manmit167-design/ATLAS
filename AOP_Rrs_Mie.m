@@ -9,6 +9,8 @@ University of Dayton, 300 College Park, Dayton, OH 45469
 Director, Sustainability Program and Graduate Certificate
 Professor, Earth and Environmental Geosciences
 University of Dayton, 300 College Park, Dayton, OH 45469
+3) Dr. Jeffrey S. Kargel- Senior Scientist, Planetary Science Institute, 
+   Tucson, AZ
 
 Base Code:
 
