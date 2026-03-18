@@ -32,7 +32,6 @@ global C_ph lambda S_CDOM type_Rrs_below zB ...
 
 %% =========================================================================
 %% PART A — SENSITIVITY ANALYSIS
-%  Source: published sensitivity-only script.  Nothing changed.
 %% =========================================================================
 
 %% Step 1: Load Wavelength Data
@@ -516,7 +515,7 @@ if n_refs > 1
 end
 
 %% Save combined results
-save('GLAM_BioLithRT_Sensitivity_BestFit_Results.mat', ...
+save('ATLAS_Sensitivity_BestFit_Results.mat', ...
     'lambda', 'corr_matrix', 'weights', ...
     'Rrs_mean_diag', 'Rrs_std_diag', 'Rrs_CV_diag', ...
     'params', 'Rrs_MC', 'lambda_weights', ...
@@ -526,7 +525,7 @@ save('GLAM_BioLithRT_Sensitivity_BestFit_Results.mat', ...
     'best_mu_all', 'best_rmse_all', 'best_params_log', ...
     'prior_means', 'prior_stds', 'N_coarse', 'lambda_reg');
 
-fprintf('\nResults saved: GLAM_BioLithRT_Sensitivity_BestFit_Results.mat\n');
+fprintf('\nResults saved: ATLAS_Sensitivity_BestFit_Results.mat\n');
 fprintf('=============================================================\n');
 
 %% =========================================================================
@@ -541,7 +540,7 @@ function [mu_log, sigma_log] = geo_to_lognormal(mu_geo, CV)
 end
 
 function weights = calculate_wavelength_weights(lambda)
-    % Uniform weighting across VIS/NIR/SWIR — published formula, do not change.
+    % Uniform weighting across VIS/NIR/SWIR.
     weights = ones(size(lambda));
     vis_idx  = lambda >= 400  & lambda < 700;   weights(vis_idx)  = 1.0;
     nir_idx  = lambda >= 700  & lambda < 1000;  weights(nir_idx)  = 1.0;
@@ -556,7 +555,7 @@ function Rrs_mean = run_mc_Rrs_mean_optimized(lambda, N_MC, sun_mu, view_mu, ...
     % Forward model used by the optimiser (Stage 1 evaluation + Stage 2 objective).
     %
     % S_CDOM CORRECTION: original code used 0.001 + 0.008*exp(-C_CDOM).
-    % Corrected here to 0.0088 + 0.0092*exp(-C_CDOM) to match the published
+    % Corrected here to 0.0088 + 0.0092*exp(-C_CDOM) to match the 
     % sensitivity forward model.  Using two different S_CDOM formulas in
     % sensitivity vs optimisation is an internal inconsistency that would
     % cause the optimizer to search a landscape computed by a different model
@@ -589,7 +588,7 @@ function Rrs_mean = run_mc_Rrs_mean_optimized(lambda, N_MC, sun_mu, view_mu, ...
         C_X    = lognrnd(CX_mu_log,    CX_sigma_log);
         g_size = lognrnd(gsize_mu_log, gsize_sigma_log);
 
-        % Corrected S_CDOM — consistent with published sensitivity model
+        % Corrected S_CDOM
         S_CDOM = 0.0088 + 0.0092 * exp(-1 * C_CDOM);
 
         [view_w, sun_w, rho_L] = Snell_law(view, sun);
@@ -609,7 +608,7 @@ function cost = objective_function_bayesian_safe(x_log, lambda, N_MC, target, ..
                                                   lambda_weights, prior_means, prior_stds, lambda_reg)
     % Bayesian objective function with Tikhonov regularisation (S5.2).
     % cost = sqrt(chi2_data) + lambda_reg * sqrt(chi2_prior)
-    % All NaN/Inf guards retained from original.
+    % All NaN/Inf guards retained.
 
     x_log = x_log(:);
 
