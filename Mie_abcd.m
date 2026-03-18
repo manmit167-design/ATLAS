@@ -7,6 +7,7 @@
 %University of Dayton, 300 College Park, Dayton, OH 45469
 %3) Dr. Jeffrey S. Kargel- Senior Scientist, Planetary Science Institute, 
 %   Tucson, AZ
+%%% Base Code Adopted from Mätzler, C. (2002). MATLAB functions for Mie scattering and absorption, version 2. IAP Res. Rep, 8(1), 9.
 function result = Mie_abcd(m, x)
 % Computes a matrix of Mie coefficients, a_n, b_n, c_n, d_n,
 % of orders n=1 to nmax, complex refractive index m=m'+im",
