@@ -208,7 +208,7 @@ C_X = input('Enter Suspended Particulate Matter C_X [g/m^3]: ');
 g_size_microm = input('Enter grain size in micrometers [µm]: ');
 
 % 4) Slope for CDOM absorption (automatically calculated)
-S_CDOM = 0.0092+0.008*exp(-1*C_CDOM);
+S_CDOM = 0.0088 + 0.0092*exp(-1*C_CDOM);
 
 % 6) Convert grain size to meters
 g_size = g_size_microm * 1e-6;
